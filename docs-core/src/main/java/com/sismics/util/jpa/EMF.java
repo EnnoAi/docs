@@ -63,7 +63,7 @@ public final class EMF {
         try {
             URL hibernatePropertiesUrl = EMF.class.getResource("/hibernate.properties");
             if (hibernatePropertiesUrl != null) {
-                log.info("Configuring EntityManager from hibernate.properties" + hibernatePropertiesUrl.toString());
+                log.info("Configuring EntityManager from hibernate.properties : " + hibernatePropertiesUrl.toString());
                 
                 InputStream is = hibernatePropertiesUrl.openStream();
                 Properties properties = new Properties();
@@ -80,6 +80,8 @@ public final class EMF {
         String databasePassword = System.getenv("DATABASE_PASSWORD");
 
         log.info("Configuring EntityManager from environment parameters");
+        log.info(" Database URL :" + databaseUrl);
+        log.info(" Database user :" + databaseUsername);
         Map<Object, Object> props = new HashMap<>();
         Path dbDirectory = DirectoryUtil.getDbDirectory();
         String dbFile = dbDirectory.resolve("docs").toAbsolutePath().toString();
