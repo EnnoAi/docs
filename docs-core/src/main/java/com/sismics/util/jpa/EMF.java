@@ -63,7 +63,7 @@ public final class EMF {
         try {
             URL hibernatePropertiesUrl = EMF.class.getResource("/hibernate.properties");
             if (hibernatePropertiesUrl != null) {
-                log.info("Configuring EntityManager from hibernate.properties");
+                log.info("Configuring EntityManager from hibernate.properties" + hibernatePropertiesUrl.toString());
                 
                 InputStream is = hibernatePropertiesUrl.openStream();
                 Properties properties = new Properties();
