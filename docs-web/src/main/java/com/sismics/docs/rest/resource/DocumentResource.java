@@ -680,7 +680,7 @@ public class DocumentResource extends BaseResource {
         // Validate input data
         title = ValidationUtil.validateLength(title, "title", 1, 100, false);
         language = ValidationUtil.validateLength(language, "language", 3, 7, false);
-        description = ValidationUtil.validateLength(description, "description", 0, 4000, true);
+        description = ValidationUtil.validateLength(description, "description", 0, 10000, true);
         subject = ValidationUtil.validateLength(subject, "subject", 0, 500, true);
         identifier = ValidationUtil.validateLength(identifier, "identifier", 0, 500, true);
         publisher = ValidationUtil.validateLength(publisher, "publisher", 0, 500, true);
@@ -802,7 +802,7 @@ public class DocumentResource extends BaseResource {
         // Validate input data
         title = ValidationUtil.validateLength(title, "title", 1, 100, false);
         language = ValidationUtil.validateLength(language, "language", 3, 7, false);
-        description = ValidationUtil.validateLength(description, "description", 0, 4000, true);
+        description = ValidationUtil.validateLength(description, "description", 0, 10000, true);
         subject = ValidationUtil.validateLength(subject, "subject", 0, 500, true);
         identifier = ValidationUtil.validateLength(identifier, "identifier", 0, 500, true);
         publisher = ValidationUtil.validateLength(publisher, "publisher", 0, 500, true);
@@ -933,7 +933,7 @@ public class DocumentResource extends BaseResource {
         } else {
             document.setTitle(StringUtils.abbreviate(mailContent.getSubject(), 100));
         }
-        document.setDescription(StringUtils.abbreviate(mailContent.getMessage(), 4000));
+        document.setDescription(StringUtils.abbreviate(mailContent.getMessage(), 10000));
         document.setSubject(StringUtils.abbreviate(mailContent.getSubject(), 500));
         document.setFormat("EML");
         document.setSource("Email");
