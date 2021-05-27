@@ -70,7 +70,7 @@ public class WebhookResource extends BaseResource {
      * @apiDescription Each time the specified event is raised, the webhook URL will be POST-ed with the following JSON payload: {"event": "Event name", "id": "ID of the document or file"}
      * @apiName PutWebhook
      * @apiGroup Webhook
-     * @apiParam {String="DOCUMENT_CREATED","DOCUMENT_UPDATED","DOCUMENT_DELETED","FILE_CREATED","FILE_UPDATED","FILE_DELETED"} event Event
+     * @apiParam {String="DOCUMENT_CREATED","DOCUMENT_UPDATED","DOCUMENT_DELETED","FILE_CREATED","FILE_UPDATED","FILE_DELETED", "FILE_PROCESSING_ENDED"} event Event
      * @apiParam {String} url URL
      * @apiSuccess {String} status Status OK
      * @apiError (client) ForbiddenError Access denied

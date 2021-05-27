@@ -11,5 +11,6 @@ public enum WebhookEvent {
     DOCUMENT_DELETED,
     FILE_CREATED,
     FILE_UPDATED,
-    FILE_DELETED
+    FILE_DELETED,
+    FILE_PROCESSING_ENDED
 }

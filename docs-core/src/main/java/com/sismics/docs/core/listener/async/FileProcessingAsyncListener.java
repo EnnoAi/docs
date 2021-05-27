@@ -6,6 +6,7 @@ import com.sismics.docs.core.dao.FileDao;
 import com.sismics.docs.core.dao.UserDao;
 import com.sismics.docs.core.event.FileCreatedAsyncEvent;
 import com.sismics.docs.core.event.FileEvent;
+import com.sismics.docs.core.event.FileProcessingEndedAsyncEvent;
 import com.sismics.docs.core.event.FileUpdatedAsyncEvent;
 import com.sismics.docs.core.model.context.AppContext;
 import com.sismics.docs.core.model.jpa.File;
@@ -18,6 +19,7 @@ import com.sismics.docs.core.util.format.FormatHandler;
 import com.sismics.docs.core.util.format.FormatHandlerUtil;
 import com.sismics.util.ImageUtil;
 import com.sismics.util.Scalr;
+import com.sismics.util.context.ThreadLocalContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -180,6 +182,17 @@ public class FileProcessingAsyncListener {
             log.error("Error extracting content from: " + file, e);
         }
         log.info(MessageFormat.format("File content extracted in {0}ms: " + file.getId(), System.currentTimeMillis() - startTime));
+
+        if (content != null && file.getDocumentId() != null) {
+            // DDD : WebHook
+            // Raise a processing file ended event
+            FileProcessingEndedAsyncEvent fileProcessingEndedAsyncEvent = new FileProcessingEndedAsyncEvent();
+            fileProcessingEndedAsyncEvent.setFileId(event.getFileId());
+            fileProcessingEndedAsyncEvent.setDocumentId(file.getDocumentId());
+            fileProcessingEndedAsyncEvent.setUserId("admin");
+            ThreadLocalContext.get().addAsyncEvent(fileProcessingEndedAsyncEvent);
+            log.info("Sending Document Processing Ended : " + file.getDocumentId());
+        }
 
         return content;
     }

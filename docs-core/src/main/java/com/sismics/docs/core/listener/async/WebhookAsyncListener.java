@@ -69,6 +69,12 @@ public class WebhookAsyncListener {
         triggerWebhook(WebhookEvent.FILE_DELETED, event.getFileId());
     }
 
+    @Subscribe
+    @AllowConcurrentEvents
+    public void on(final FileProcessingEndedAsyncEvent event) {
+        triggerWebhook(WebhookEvent.FILE_PROCESSING_ENDED, event.getDocumentId());
+    }
+
     /**
      * Trigger the webhooks for the specified event.
      *
