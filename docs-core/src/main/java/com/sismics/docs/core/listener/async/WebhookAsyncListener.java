@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Listener for triggering webhooks.
@@ -30,7 +31,10 @@ public class WebhookAsyncListener {
     /**
      * OkHttp client.
      */
-    private static final OkHttpClient client = new OkHttpClient();
+    // private static final OkHttpClient client = new OkHttpClient();
+    private static final OkHttpClient client = new OkHttpClient.Builder()
+            .readTimeout(15, TimeUnit.MINUTES)
+            .build();
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     @Subscribe
